@@ -6,19 +6,21 @@ const searchGithub = async () => {
       `https://api.github.com/users?since=${start}`,
       {
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
         },
       }
     );
     // console.log('Response:', response);
-    const data = await response.json();
     if (!response.ok) {
-      throw new Error('invalid API response, check the network tab');
+      const errorData = await response.json();
+      console.error('GitHub API Error:', errorData);
+      throw new Error(`GitHub API Error: ${errorData.message}`);
     }
     // console.log('Data:', data);
+    const data = await response.json();
     return data;
   } catch (err) {
-    // console.log('an error occurred', err);
+    console.error('Error fetching data:', err);
     return [];
   }
 };
