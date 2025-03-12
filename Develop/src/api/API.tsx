@@ -1,45 +1,58 @@
-const searchGithub = async () => {
+import { Candidate } from '../interfaces/Candidate.interface';
+
+const searchGithub = async (): Promise<Candidate[]> => {
   try {
+    console.log("GitHub Token:", import.meta.env.VITE_GITHUB_TOKEN);
+
     const start = Math.floor(Math.random() * 100000000) + 1;
-    // console.log(import.meta.env);
     const response = await fetch(
       `https://api.github.com/users?since=${start}`,
       {
         headers: {
-          Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
+          Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
         },
       }
     );
-    // console.log('Response:', response);
+    
     if (!response.ok) {
       const errorData = await response.json();
       console.error('GitHub API Error:', errorData);
       throw new Error(`GitHub API Error: ${errorData.message}`);
     }
-    // console.log('Data:', data);
-    const data = await response.json();
-    return data;
+    
+    const users = await response.json();
+    
+    // Get detailed information for each user
+    const detailedUsers = await Promise.all(
+      users.map((user: any) => searchGithubUser(user.login))
+    );
+    
+    return detailedUsers.filter(user => user && user.id) as Candidate[];
   } catch (err) {
     console.error('Error fetching data:', err);
     return [];
   }
 };
 
-const searchGithubUser = async (username: string) => {
+const searchGithubUser = async (username: string): Promise<Candidate | null> => {
   try {
+    console.log("GitHub Token:", import.meta.env.VITE_GITHUB_TOKEN);
+    
     const response = await fetch(`https://api.github.com/users/${username}`, {
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
       },
     });
-    const data = await response.json();
+    
     if (!response.ok) {
-      throw new Error('invalid API response, check the network tab');
+      throw new Error('Invalid API response, check the network tab');
     }
-    return data;
+    
+    const data = await response.json();
+    return data as Candidate;
   } catch (err) {
-    // console.log('an error occurred', err);
-    return {};
+    console.error('Error fetching user data:', err);
+    return null;
   }
 };
 
