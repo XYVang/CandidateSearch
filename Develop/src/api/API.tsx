@@ -45,7 +45,7 @@ const searchGithubUser = async (username: string): Promise<Candidate | null> => 
     });
     
     if (!response.ok) {
-      throw new Error('Invalid API response, check the network tab');
+      throw new Error('Invalid API response, check network tab');
     }
     
     const data = await response.json();
