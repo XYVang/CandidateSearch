@@ -16,10 +16,10 @@ The employer can either search for a certain github user or can press the "fetch
 Here are some images that provide the products usability.
 
 Candidate Search Page 
-![Candidate Search Page](Develop/Assets/CandidateSearch.png)
+![Candidate Search Page](./Develop/Assets/CandidateSearch.png)
 
 Saved Candidates Page 
-![Saved Candidates Page](Develop/Assets/SavedCandidates.png)
+![Saved Candidates Page](./Develop/Assets/SavedCandidates.png)
 
 ## License
 MIT License
