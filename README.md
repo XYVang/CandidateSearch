@@ -1,8 +1,8 @@
-# Full Stack React Kanban Board
+# Candidate Search
 
 ## Description
 
-This website uses front and back end coding as well as a database for a Kanban board deployed on Render.
+This website helps employers search for candidates by using github's API. 
 
 ## Table of Contents
 
@@ -14,18 +14,16 @@ This website uses front and back end coding as well as a database for a Kanban b
 
 ## Usage
 
-Users are able to log in with correct credentials to the Kanban board. They will then be able to create new tickets and edit/delete existing ones as well.
+The employer can either search for a certain github user or can press the "fetch candidates" button to generate an active user. Then they'll be able to add them to their personalized favorite list if they are interested.
 
 Here are some images that provide the products usability.
 
-Home Page
-![Home page](Assets/homepage.png)
+Candidate Search Page
+![Home page](Develop\Assets\CandidateSearch.png)
 
-Login Page
-![Home page](Assets/loginpageimg.png)
+Saved Candidates Page
+![Home page](Develop\Assets\SavedCandidates.png)
 
-Kanban Board Page
-![Home page](Assets/KanbanBoardimg.png)
 ## License
 
 MIT License
